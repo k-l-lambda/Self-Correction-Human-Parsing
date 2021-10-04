@@ -91,8 +91,8 @@ def get_palette(num_cls):
 def main():
     args = get_arguments()
 
-    gpus = [int(i) for i in args.gpu.split(',')]
-    assert len(gpus) == 1
+    #gpus = [int(i) for i in args.gpu.split(',')]
+    #assert len(gpus) == 1
     if not args.gpu == 'None':
         os.environ["CUDA_VISIBLE_DEVICES"] = args.gpu
 
@@ -110,7 +110,7 @@ def main():
         name = k[7:]  # remove `module.`
         new_state_dict[name] = v
     model.load_state_dict(new_state_dict)
-    model.cuda()
+    #model.cuda()
     model.eval()
 
     transform = transforms.Compose([
@@ -133,7 +133,7 @@ def main():
             w = meta['width'].numpy()[0]
             h = meta['height'].numpy()[0]
 
-            output = model(image.cuda())
+            output = model(image)
             upsample = torch.nn.Upsample(size=input_size, mode='bilinear', align_corners=True)
             upsample_output = upsample(output[0][-1][0].unsqueeze(0))
             upsample_output = upsample_output.squeeze()

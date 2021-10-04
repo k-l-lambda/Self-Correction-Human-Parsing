@@ -5,36 +5,36 @@
 #include <vector>
 
 std::vector<at::Tensor> mean_var_cpu(at::Tensor x);
-std::vector<at::Tensor> mean_var_cuda(at::Tensor x);
-std::vector<at::Tensor> mean_var_cuda_h(at::Tensor x);
+//std::vector<at::Tensor> mean_var_cuda(at::Tensor x);
+//std::vector<at::Tensor> mean_var_cuda_h(at::Tensor x);
 
 at::Tensor forward_cpu(at::Tensor x, at::Tensor mean, at::Tensor var, at::Tensor weight, at::Tensor bias,
                        bool affine, float eps);
-at::Tensor forward_cuda(at::Tensor x, at::Tensor mean, at::Tensor var, at::Tensor weight, at::Tensor bias,
+/*at::Tensor forward_cuda(at::Tensor x, at::Tensor mean, at::Tensor var, at::Tensor weight, at::Tensor bias,
                         bool affine, float eps);
 at::Tensor forward_cuda_h(at::Tensor x, at::Tensor mean, at::Tensor var, at::Tensor weight, at::Tensor bias,
-                          bool affine, float eps);
+                          bool affine, float eps);*/
 
 std::vector<at::Tensor> edz_eydz_cpu(at::Tensor z, at::Tensor dz, at::Tensor weight, at::Tensor bias,
                                      bool affine, float eps);
-std::vector<at::Tensor> edz_eydz_cuda(at::Tensor z, at::Tensor dz, at::Tensor weight, at::Tensor bias,
+/*std::vector<at::Tensor> edz_eydz_cuda(at::Tensor z, at::Tensor dz, at::Tensor weight, at::Tensor bias,
                                       bool affine, float eps);
 std::vector<at::Tensor> edz_eydz_cuda_h(at::Tensor z, at::Tensor dz, at::Tensor weight, at::Tensor bias,
-                                        bool affine, float eps);
+                                        bool affine, float eps);*/
 
 at::Tensor backward_cpu(at::Tensor z, at::Tensor dz, at::Tensor var, at::Tensor weight, at::Tensor bias,
                                      at::Tensor edz, at::Tensor eydz, bool affine, float eps);
-at::Tensor backward_cuda(at::Tensor z, at::Tensor dz, at::Tensor var, at::Tensor weight, at::Tensor bias,
+/*at::Tensor backward_cuda(at::Tensor z, at::Tensor dz, at::Tensor var, at::Tensor weight, at::Tensor bias,
                                       at::Tensor edz, at::Tensor eydz, bool affine, float eps);
 at::Tensor backward_cuda_h(at::Tensor z, at::Tensor dz, at::Tensor var, at::Tensor weight, at::Tensor bias,
-                                        at::Tensor edz, at::Tensor eydz, bool affine, float eps);
+                                        at::Tensor edz, at::Tensor eydz, bool affine, float eps);*/
 
 void leaky_relu_backward_cpu(at::Tensor z, at::Tensor dz, float slope);
-void leaky_relu_backward_cuda(at::Tensor z, at::Tensor dz, float slope);
-void leaky_relu_backward_cuda_h(at::Tensor z, at::Tensor dz, float slope);
+//void leaky_relu_backward_cuda(at::Tensor z, at::Tensor dz, float slope);
+//void leaky_relu_backward_cuda_h(at::Tensor z, at::Tensor dz, float slope);
 
 void elu_backward_cpu(at::Tensor z, at::Tensor dz);
-void elu_backward_cuda(at::Tensor z, at::Tensor dz);
+//void elu_backward_cuda(at::Tensor z, at::Tensor dz);
 
 static void get_dims(at::Tensor x, int64_t& num, int64_t& chn, int64_t& sp) {
   num = x.size(0);
