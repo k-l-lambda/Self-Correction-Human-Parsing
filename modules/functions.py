@@ -1,4 +1,5 @@
-from os import path
+
+from os import path, environ
 import torch
 import torch.distributed as dist
 import torch.autograd as autograd
@@ -6,16 +7,21 @@ import torch.cuda.comm as comm
 from torch.autograd.function import once_differentiable
 from torch.utils.cpp_extension import load
 
+
+NO_CUDA = int(environ.get('NO_CUDA', 0))
+
+SOURCE_FILES = [
+    "inplace_abn.cpp",
+    "inplace_abn_cpu.cpp",
+]
+if not NO_CUDA:
+	SOURCE_FILES += ["inplace_abn_cuda.cu", "inplace_abn_cuda_half.cu"]
+
 _src_path = path.join(path.dirname(path.abspath(__file__)), "src")
 _backend = load(name="inplace_abn",
-                extra_cflags=["-O3"],
-                sources=[path.join(_src_path, f) for f in [
-                    "inplace_abn.cpp",
-                    "inplace_abn_cpu.cpp",
-                    #"inplace_abn_cuda.cu",
-                    #"inplace_abn_cuda_half.cu"
-                ]],
-                #extra_cuda_cflags=["--expt-extended-lambda"],
+                extra_cflags=["-O3", f"-DNO_CUDA={NO_CUDA}"],
+                sources=[path.join(_src_path, f) for f in SOURCE_FILES],
+                extra_cuda_cflags=["--expt-extended-lambda"],
 				with_cuda=False)
 
 # Activation names
