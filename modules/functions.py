@@ -22,7 +22,7 @@ _backend = load(name="inplace_abn",
                 extra_cflags=["-O3", f"-DNO_CUDA={NO_CUDA}"],
                 sources=[path.join(_src_path, f) for f in SOURCE_FILES],
                 extra_cuda_cflags=["--expt-extended-lambda"],
-				with_cuda=False)
+                with_cuda=not NO_CUDA)
 
 # Activation names
 ACT_RELU = "relu"
