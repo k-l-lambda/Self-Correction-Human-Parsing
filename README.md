@@ -53,6 +53,12 @@ To extract the human parsing representation, simply put your own image in the `I
 python simple_extractor.py --dataset [DATASET] --model-restore [CHECKPOINT_PATH] --input-dir [INPUT_PATH] --output-dir [OUTPUT_PATH]
 ```
 
+(By CPU:)
+
+```
+python3 .\simple_extractor.py --dataset pascal --model-restore pretrain_model\exp-schp-201908270938-pascal-person-part.pth --gpu=None --input-dir=.\data --output-dir=.\outputs
+```
+
 **[Updated]** Here is also a [colab demo example](https://colab.research.google.com/drive/1JOwOPaChoc9GzyBi5FUEYTSaP2qxJl10?usp=sharing) for quick inference provided by [@levindabhi](https://github.com/levindabhi).
 
 The `DATASET` command has three options, including 'lip', 'atr' and 'pascal'. Note each pixel in the output images denotes the predicted label number. The output images have the same size as the input ones. To better visualization, we put a palette with the output images. We suggest you to read the image with `PIL`.

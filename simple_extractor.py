@@ -21,6 +21,10 @@ from tqdm import tqdm
 from torch.utils.data import DataLoader
 import torchvision.transforms as transforms
 
+from dotenv import load_dotenv
+load_dotenv(dotenv_path = './.env.local')
+load_dotenv()
+
 import networks
 from utils.transforms import transform_logits
 from datasets.simple_extractor_dataset import SimpleFolderDataset
